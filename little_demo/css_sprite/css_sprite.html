@@ -39,11 +39,15 @@
         moveY 13s linear infinite;
     }
 
-    .sprite:hover {
+    input[id="sprite_check"]:checked+label div.sprite {
       animation: anima 0.3s steps(15) infinite,
         moveX 11s linear infinite,
         moveY 13s linear infinite;
       animation-play-state: running, paused, paused;
+    }
+
+    input[id="sprite_check"] {
+      display: none;
     }
 
     @keyframes anima {
@@ -88,7 +92,10 @@
 
 <body>
   <div class="box">
-    <div class="sprite"></div>
+    <input type="checkbox" id="sprite_check">
+    <label for="sprite_check">
+      <div class="sprite"></div>
+    </label>
   </div>
 
 </body>
