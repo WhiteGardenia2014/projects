@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css-clock</title>
+  <style>
+    .container {
+      height: 700px;
+    }
+
+    .clock {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .plat {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border-radius: 50%;
+      background-color: #fff;
+      box-shadow: 0 0 40px -5px #cccccc;
+    }
+
+    .number div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 40px;
+    }
+
+    .number div:nth-child(1) {
+      transform: rotate(30deg) translateY(-220px) rotate(-30deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(2) {
+      transform: rotate(60deg) translateY(-220px) rotate(-60deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(3) {
+      transform: rotate(90deg) translateY(-220px) rotate(-90deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(4) {
+      transform: rotate(120deg) translateY(-220px) rotate(-120deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(5) {
+      transform: rotate(150deg) translateY(-220px) rotate(-150deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(6) {
+      transform: rotate(180deg) translateY(-220px) rotate(-180deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(7) {
+      transform: rotate(210deg) translateY(-220px) rotate(-210deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(8) {
+      transform: rotate(240deg) translateY(-220px) rotate(-240deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(9) {
+      transform: rotate(270deg) translateY(-220px) rotate(-270deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(10) {
+      transform: rotate(300deg) translateY(-220px) rotate(-300deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(11) {
+      transform: rotate(330deg) translateY(-220px) rotate(-330deg) translate(-50%, -50%);
+    }
+
+    .number div:nth-child(12) {
+      transform: rotate(0deg) translateY(-220px) rotate(0deg) translate(-50%, -50%);
+    }
+
+    .clock .hand {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .hour {
+      height: 150px;
+      width: 10px;
+      background-color: #333;
+      border-radius: 50% 50% 0 0/20% 20% 0 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform-origin: center bottom;
+    }
+
+    .min {
+      height: 180px;
+      width: 6px;
+      background-color: #333;
+      border-radius: 50% 50% 0 0/20% 20% 0 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform-origin: center bottom;
+      animation: minute 60s infinite;
+    }
+
+    .sec {
+      height: 250px;
+      width: 4px;
+      background-color: lightcoral;
+      border-radius: 50% 50% 0 0/20% 20% 0 0;
+      bottom: -30px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform-origin: center 220px;
+      animation: second 1s infinite;
+    }
+
+    .hour-box {
+      animation: time 43200s steps(360) infinite;
+    }
+
+    .min-box {
+      animation: time 3600s steps(60) infinite;
+    }
+
+    .sec-box {
+      animation: time 60s steps(60) infinite;
+    }
+
+    @keyframes time {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes second {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      5% {
+        transform: rotate(2deg);
+      }
+
+      10% {
+        transform: rotate(0deg);
+      }
+
+      15% {
+        transform: rotate(-1deg);
+      }
+
+      20% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes minute {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      0.2% {
+        transform: rotate(1deg);
+      }
+
+      0.4% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="clock">
+      <div class="plat">
+        <div class="number">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+          <div>10</div>
+          <div>11</div>
+          <div>12</div>
+        </div>
+      </div>
+      <div class="hand hour-box">
+        <div class="hour"></div>
+      </div>
+      <div class="hand min-box">
+        <div class="min"></div>
+      </div>
+      <div class="hand sec-box">
+        <div class="sec"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var myDate = new Date();
+    var times;
+    var hour_box = document.querySelector(".hour-box");
+    var min_box = document.querySelector(".min-box");
+    var sec_box = document.querySelector(".sec-box");
+
+    times = -(myDate.getHours() * 3600 + myDate.getMinutes() * 60 + myDate.getSeconds());
+    hour_box.style.animationDelay = "" + times + "s";  //不要加分号
+    min_box.style.animationDelay = "" + times + "s";
+    sec_box.style.animationDelay = "" + times + "s";
+
+  </script>
+</body>
+
+</html>
