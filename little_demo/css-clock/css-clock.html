@@ -8,8 +8,10 @@
   <title>css-clock</title>
   <style>
     .container {
-      width: 700px;
-      height: 700px;
+      position: relative;
+      width: 500px;
+      height: 500px;
+      padding: 100px;
       margin: auto;
     }
 
@@ -17,9 +19,6 @@
       width: 500px;
       height: 500px;
       position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
     }
 
     .plat {
@@ -135,7 +134,8 @@
       right: 0;
       margin: auto;
       transform-origin: center 220px;
-      animation: second 1s infinite;
+      animation: second 1s infinite, shadow 60s infinite;
+      box-shadow: 4px 2px 3px rgba(60, 60, 60, 0.3);
     }
 
     .hour-box {
@@ -201,6 +201,20 @@
 
       100% {
         transform: rotate(0deg);
+      }
+    }
+
+    @keyframes shadow {
+      0% {
+        box-shadow: 4px 2px 3px rgba(60, 60, 60, 0.3);
+      }
+
+      50% {
+        box-shadow: -4px -2px 3px rgba(60, 60, 60, 0.3);
+      }
+
+      100% {
+        box-shadow: 4px 2px 3px rgba(60, 60, 60, 0.3);
       }
     }
   </style>
