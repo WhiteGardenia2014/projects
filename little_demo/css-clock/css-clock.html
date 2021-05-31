@@ -257,11 +257,13 @@
     var hour_box = document.querySelector(".hour-box");
     var min_box = document.querySelector(".min-box");
     var sec_box = document.querySelector(".sec-box");
+    var sec = document.querySelector(".sec");
 
     times = -(myDate.getHours() * 3600 + myDate.getMinutes() * 60 + myDate.getSeconds());
     hour_box.style.animationDelay = "" + times + "s";  //不要加分号
     min_box.style.animationDelay = "" + times + "s";
     sec_box.style.animationDelay = "" + times + "s";
+    sec.style.animationDelay = "" + times + "s";
 
   </script>
 </body>
