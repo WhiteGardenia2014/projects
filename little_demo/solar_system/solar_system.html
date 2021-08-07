@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      margin: 0;
+      padding: 0;
+      background: #222222;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .solar-system {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: auto;
+    }
+
+    .background {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+    }
+
+    [class^="pathway"] {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed #999;
+    }
+
+    .pathway-1 {
+      width: 180px;
+      height: 180px;
+    }
+
+    .pathway-2 {
+      width: 360px;
+      height: 360px;
+    }
+
+    .pathway-3 {
+      width: 640px;
+      height: 640px;
+    }
+
+    .pathway-4 {
+      width: 1000px;
+      height: 1000px;
+    }
+
+    .pathway-5 {
+      width: 1600px;
+      height: 1600px;
+    }
+
+    .path-moon {
+      position: absolute;
+      transform: translate(-35px, -35px);
+      border-radius: 50%;
+      border: 1px dashed #999;
+      width: 130px;
+      height: 130px;
+    }
+
+
+
+    .sun {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      background-image: url(sun.png);
+      background-size: contain;
+    }
+
+    .mercury {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      background-image: url(mercury.png);
+      background-size: contain;
+    }
+
+    .venus {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      background-image: url(venus.png);
+      background-size: contain;
+    }
+
+    .earth {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 60px;
+      background-image: url(earth.png);
+      background-size: contain;
+    }
+
+    .moon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      background-image: url(moon.png);
+      background-size: contain;
+    }
+
+    .mars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      background-image: url(mars.png);
+      background-size: contain;
+    }
+
+    .jupiter {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 160px;
+      height: 160px;
+      background-image: url(jupiter.png);
+      background-size: contain;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="solar-system">
+
+      <div class="background">
+        <div class="pathway-1"></div>
+        <div class="pathway-2"></div>
+        <div class="pathway-3"></div>
+        <div class="pathway-4"></div>
+        <div class="pathway-5"></div>
+      </div>
+
+      <div class="sun"></div>
+      <div class="mercury"></div>
+      <div class="venus"></div>
+      <div class="earth">
+        <div class="path-moon"></div>
+        <div class="moon"></div>
+      </div>
+      <div class="mars"></div>
+      <div class="jupiter"></div>
+    </div>
+  </div>
+
+
+  <script>
+    var sun = document.querySelector(".sun")
+    var mercury = document.querySelector(".mercury")
+    var venus = document.querySelector(".venus")
+    var earth = document.querySelector(".earth")
+    var moon = document.querySelector(".moon")
+    var mars = document.querySelector(".mars")
+    var jupiter = document.querySelector(".jupiter")
+
+    var sumAngle = 0
+    var mercuryAngle = 0
+    var venusAngle = 0
+    var earthAngle = 0
+    var moonAngle = 0
+    var marsAngle = 0
+    var jupiterAngle = 0
+
+    function animate(time) {
+      // 太阳运动动画
+      sumAngle = time * 0.001
+      sun.style.transform = `rotate(${sumAngle * 17 % 360}deg)`
+
+      // 水星运动动画
+      mercuryAngle = time * 0.0008
+      mercury.style.top = (Math.sin(mercuryAngle) * 90) + 40 + "px"
+      mercury.style.left = (Math.cos(mercuryAngle) * 90) + 40 + "px"
+      mercury.style.transform = `translate(-50%,-50%) rotate(${mercuryAngle * 37 % 360}deg)`
+
+      // 金星运动动画
+      venusAngle = time * 0.0003 + 3.03
+      venus.style.top = (Math.sin(venusAngle) * 180) + 40 + "px"
+      venus.style.left = (Math.cos(venusAngle) * 180) + 40 + "px"
+      venus.style.transform = `translate(-50%,-50%) rotate(${venusAngle * 59 % 360}deg)`
+
+      // 地球运动动画
+      earthAngle = time * 0.00018 - 1.23
+      earth.style.top = (Math.sin(earthAngle) * 320) + 40 + "px"
+      earth.style.left = (Math.cos(earthAngle) * 320) + 40 + "px"
+      earth.style.transform = `translate(-50%,-50%) rotate(${earthAngle * 117 % 360}deg)`
+
+
+      // 月球运动动画
+      moonAngle = time * 0.00216 + 0.23
+      moon.style.top = (Math.sin(moonAngle) * 65) + 30 + "px"
+      moon.style.left = (Math.cos(moonAngle) * 65) + 30 + "px"
+      moon.style.transform = `translate(-50%,-50%) rotate(${moonAngle * 57 % 360 + 250}deg)`
+
+      // 火星运动动画
+      marsAngle = time * 0.0001 + 0
+      mars.style.top = (Math.sin(marsAngle) * 500) + 40 + "px"
+      mars.style.left = (Math.cos(marsAngle) * 500) + 40 + "px"
+      mars.style.transform = `translate(-50%,-50%) rotate(${marsAngle * 23 % 360}deg)`
+
+      // 木星运动动画
+      jupiterAngle = time * 0.00004 + 2.51
+      jupiter.style.top = (Math.sin(jupiterAngle) * 800) + 40 + "px"
+      jupiter.style.left = (Math.cos(jupiterAngle) * 800) + 40 + "px"
+      jupiter.style.transform = `translate(-50%,-50%) rotate(${jupiterAngle * 29 % 360}deg)`
+
+      requestAnimationFrame(animate)
+    }
+
+    requestAnimationFrame(animate)
+  </script>
+
+</body>
+
+</html>
