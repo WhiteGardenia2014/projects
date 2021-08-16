@@ -1,0 +1,79 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5008612",
+      "name": "铅笔",
+      "font_class": "icon-test",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "6266248",
+      "name": "矩形",
+      "font_class": "juxing",
+      "unicode": "e790",
+      "unicode_decimal": 59280
+    },
+    {
+      "icon_id": "10207958",
+      "name": "画笔工具-矩形",
+      "font_class": "huabigongju-juxing",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "10207960",
+      "name": "画笔工具-椭圆",
+      "font_class": "huabigongju-tuoyuan",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "14718690",
+      "name": "tx-fill-椭圆形",
+      "font_class": "tx-fill-tuoyuanxing",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "14718691",
+      "name": "tx-fill-长方形",
+      "font_class": "tx-fill-changfangxing",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "14718732",
+      "name": "tx-椭圆形",
+      "font_class": "tx-tuoyuanxing",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "14718737",
+      "name": "tx-长方形",
+      "font_class": "tx-changfangxing",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "22761383",
+      "name": "矩形",
+      "font_class": "juxing1",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "23446404",
+      "name": "直线",
+      "font_class": "zhixian",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    }
+  ]
+}

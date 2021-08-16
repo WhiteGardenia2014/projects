@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaintBoard</title>
+  <link rel="stylesheet" href="css/paintboard.css">
+  <script src="js/paintboard.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title header-item">画板</div>
+      <div class="tools header-item">
+        <div class="text">工具栏：</div>
+        <input type="radio" id="tool-line" name="tool" checked>
+        <label for="tool-line"><span class="iconfont">&#xe601;</span></label>
+
+        <input type="radio" id="tool-straight-line" name="tool">
+        <label for="tool-straight-line"><span class="iconfont">&#xe67e;</span></label>
+
+        <input type="radio" id="tool-rect" name="tool">
+        <label for="tool-rect"><span class="iconfont">&#xe790;</span></label>
+
+        <input type="radio" id="tool-round-rect" name="tool">
+        <label for="tool-round-rect"><span class="iconfont">&#xe61c;</span></label>
+
+        <input type="radio" id="tool-ellipse" name="tool">
+        <label for="tool-ellipse"><span class="iconfont">&#xe61d;</span></label>
+      </div>
+      <div class="fill header-item">
+        <div class="text">填充</div>
+        <input type="checkbox" id="fillInput">
+      </div>
+      <div class="color header-item">
+        <div class="text">边框色</div>
+        <input type="color" id="borderColorInput">
+      </div>
+      <div class="color header-item">
+        <div class="text">填充色</div>
+        <input type="color" id="fillColorInput">
+      </div>
+      <div class="range header-item">
+        <div class="text">线条粗细：<span class="line-width-value">5</span></div>
+        <input type="range" id="widthInput" min="1" max="10" value="5">
+      </div>
+
+    </div>
+    <svg width="100%" height="600"></svg>
+    <button class="button reset">重置</button>
+    <button class="button clear">清空</button>
+    <button class="button save">保存</button>
+  </div>
+
+
+</body>
+
+</html>
