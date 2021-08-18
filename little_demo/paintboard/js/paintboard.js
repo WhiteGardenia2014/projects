@@ -1,6 +1,7 @@
 window.addEventListener('load', function () {
+  var svgContainer = document.querySelector('.svgcontainer')
   var svg = document.querySelector('svg')
-  var fill = document.querySelector('#fillInput') // 是否填充
+  var fill = document.querySelector('#fillInput') // 是否填充按钮
   var borderColorInput = document.querySelector('#borderColorInput') // 边框颜色
   var fillColorInput = document.querySelector('#fillColorInput') // 填充颜色
   var widthInput = document.querySelector('#widthInput') // 线条粗细
@@ -8,10 +9,13 @@ window.addEventListener('load', function () {
   var clearButton = document.querySelector('.clear') // 清空按钮
   var reset = document.querySelector('.reset') // 重置按钮
   var save = document.querySelector('.save') // 保存按钮
+  var openFile = document.querySelector('.open') // 打开按钮
+  var fileInput = document.querySelector('#fileInput') // 上传文件按钮
   var tools = document.querySelector('.tools') // 工具栏
 
   var radioLine = document.querySelector('#tool-line') // 画线工具 radio
   var currentTool = 'tool-line' // 设置默认为画线工具
+  var drawandnosave = false // 是否是未保存的状态
 
   // 更新宽度输入框的显示值
   widthInput.addEventListener('input', function (e) {
@@ -19,9 +23,10 @@ window.addEventListener('load', function () {
   })
 
   // 在 svg 上监听鼠标按下事件，鼠标按下后触发鼠标移动事件
-  svg.addEventListener('mousedown', function (e) {
+  svgContainer.addEventListener('mousedown', function (e) {
 
     if (e.buttons == 1) { // 如果在 svg 内按下了左键，就添加鼠标移动监听器
+      drawandnosave = true
 
       if (currentTool == 'tool-line') { // 如果是铅笔工具的情况
         // 注意 draw 函数定义在 if 语句内部，在 if 语句外部（ if 语句之前），draw = undefined
@@ -217,6 +222,7 @@ window.addEventListener('load', function () {
 
   // 为重置按钮绑定点击事件，重置画板
   reset.addEventListener('click', function (e) {
+    drawandnosave = false
     svg.textContent = ''
     radioLine.checked = true
     fill.checked = false
@@ -225,16 +231,19 @@ window.addEventListener('load', function () {
     widthInput.value = 5
     widthSpan.textContent = 5
     currentTool = 'tool-line'
+    svgContainer.innerHTML = '<svg width="100%" height="600"></svg>'
+    svg = svgContainer.querySelector('svg')
   })
 
   // 为保存按钮绑定点击事件，保存并下载画板
   save.addEventListener('click', function (e) {
+    drawandnosave = false
     let svgSource = svg.innerHTML // 获取 svg 内部的 html 内容
 
-    // 获取 svg 元素的布局宽高（去掉边框）
+    // 获取 svg 元素的布局宽高
     let svgStyle = getComputedStyle(svg)
-    let width = parseFloat(svgStyle.width) - 6
-    let height = parseFloat(svgStyle.height) - 6
+    let width = parseFloat(svgStyle.width)
+    let height = parseFloat(svgStyle.height)
 
     // 创建 svg 文件头
     let headStr = `<?xml version="1.0" encoding="utf-8"?> <svg version="1.1" width="${width}" height="${height}" 
@@ -262,13 +271,44 @@ window.addEventListener('load', function () {
     currentTool = e.target.id
   })
 
+  // 为 window 绑定关闭窗口前确认功能
+  this.window.addEventListener('beforeunload', function (e) {
+    if (drawandnosave) {
+      return e.returnValue = '还未保存，是否要退出?'
+    }
+  })
+
   // 获取鼠标和 node 元素的相对位置
   function mousePos(node) {
-    var box = node.getBoundingClientRect()
+    let box = node.getBoundingClientRect()
 
     return {
       x: window.event.clientX - box.x,
       y: window.event.clientY - box.y,
     }
   }
+
+  // 为打开按钮绑定点击事件
+  openFile.addEventListener('click', function (e) {
+    if (drawandnosave) {
+      let answer = confirm('当前绘画未保存，是否要打开新文件？')
+      if (answer == false) {
+        return
+      }
+    }
+    fileInput.click()
+  })
+
+  // 打开新文件
+  fileInput.addEventListener('change', function (e) {
+    let svgFile = fileInput.files[0] // 获取输入的第一个文件
+    let fr = new FileReader() // 创建一个文件读取器
+    fr.addEventListener('load', function () {
+      let svgFileContent = fr.result // 获取文件内容
+      svgContainer.innerHTML = svgFileContent // 将 svgContainer 内的旧 svg 对象替换为新的 svg 对象。
+      svg = svgContainer.querySelector('svg') // 更新 svg 变量为最新的 svg 对象
+      fileInput.value = null // 载入新文件后清空 fileInput 的内容
+    })
+    fr.readAsText(svgFile) // 以文本文件的方式读取 svgFile
+  })
 })

@@ -29,6 +29,7 @@ body {
   margin: 20px 0;
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
 .header-item {
@@ -70,6 +71,7 @@ body {
   }
 }
 
+
 .tools {
   flex: 1;
 }
@@ -90,6 +92,10 @@ body {
 }
 
 .save {
+  float: right;
+}
+
+.open {
   float: right;
 }
 
@@ -155,4 +161,12 @@ input[type="checkbox"] {
 svg {
   border: 3px solid black;
   box-sizing: border-box;
+}
+
+.footer {
+  user-select: none;
+}
+
+#fileInput {
+  display: none;
 }
