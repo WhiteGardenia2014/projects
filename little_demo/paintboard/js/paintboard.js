@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+  var main = document.querySelector('main')
   var svgContainer = document.querySelector('.svgcontainer')
   var svg = document.querySelector('svg')
   var fill = document.querySelector('#fillInput') // 是否填充按钮
@@ -7,23 +8,30 @@ window.addEventListener('load', function () {
   var widthInput = document.querySelector('#widthInput') // 线条粗细
   var widthSpan = document.querySelector('.line-width-value') // 线条粗细显示文字
   var clearButton = document.querySelector('.clear') // 清空按钮
-  var reset = document.querySelector('.reset') // 重置按钮
-  var save = document.querySelector('.save') // 保存按钮
+  var resetButton = document.querySelector('.reset') // 重置按钮
+  var saveButton = document.querySelector('.save') // 保存按钮
+  var helpButton = document.querySelector('.help') // 说明按钮
+  var helpText = document.querySelector('.helptext') // 说明文本
   var openFile = document.querySelector('.open') // 打开按钮
-  var fileInput = document.querySelector('#fileInput') // 上传文件按钮
+  var fileInput = document.querySelector('#fileInput') // 上传文件表单
   var tools = document.querySelector('.tools') // 工具栏
 
   var radioLine = document.querySelector('#tool-line') // 画线工具 radio
   var currentTool = 'tool-line' // 设置默认为画线工具
   var drawandnosave = false // 是否是未保存的状态
+  var shiftFlag = false // 标志 shift 键是否按下
 
   // 更新宽度输入框的显示值
   widthInput.addEventListener('input', function (e) {
     widthSpan.textContent = widthInput.value
   })
 
-  // 在 svg 上监听鼠标按下事件，鼠标按下后触发鼠标移动事件
-  svgContainer.addEventListener('mousedown', function (e) {
+  // 在 main 上监听鼠标按下事件，鼠标按下后触发鼠标移动事件
+  main.addEventListener('mousedown', function (e) {
+
+    if (e.target.classList.contains('svgcontainer')) {
+      return
+    }
 
     if (e.buttons == 1) { // 如果在 svg 内按下了左键，就添加鼠标移动监听器
       drawandnosave = true
@@ -36,7 +44,6 @@ window.addEventListener('load', function () {
 
         let pos = mousePos(svg) // 按下左键时，记录第一个点的位置
         let polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline') // 创建折线节点
-        let start = true
 
         polyline.setAttribute('fill', 'none') // 设置折线不填充
         polyline.setAttribute('stroke', borderColorInput.value) // 设置折线颜色
@@ -44,9 +51,9 @@ window.addEventListener('load', function () {
         polyline.setAttribute('stroke-linecap', 'round') // 设置折线两端为圆角
         polyline.setAttribute('stroke-linejoin', 'round') // 设置折线折点处为圆角
 
-        let points = `${pos.x} ${pos.y} `
+        let points = `${pos.x} ${pos.y} ${pos.x} ${pos.y} `
         polyline.setAttribute('points', points) // 将第一个点的位置添加到 polyline 上
-
+        svg.append(polyline)
 
         // 鼠标移动时触发的画线程序
         function drawLine(e) {
@@ -54,10 +61,6 @@ window.addEventListener('load', function () {
             document.removeEventListener('mousemove', drawLine)
             return
           } else {
-            if (start) { // 只有鼠标第一次移动后，才把折线添加进 svg 中，避免 svg 中出现无意义的点
-              start = false
-              svg.append(polyline)
-            }
             let pos = mousePos(svg) // 每次鼠标移动，获取当前鼠标位置
             points += `${pos.x} ${pos.y} ` // 并将当前位置拼接到 points 上
             polyline.setAttribute('points', points) // 用 points 更新 polyline 的内容
@@ -92,6 +95,31 @@ window.addEventListener('load', function () {
             let y1 = startPos.y
             let x2 = currPos.x
             let y2 = currPos.y
+
+            // 如果按下了 shift 键
+            if (shiftFlag == true) {
+              let deltaX = Math.abs(x2 - x1)
+              let deltaY = Math.abs(y2 - y1)
+              if (deltaY / deltaX < 0.5) {
+                y2 = y1
+              } else if (deltaY / deltaX > 2) {
+                x2 = x1
+              } else {
+                if (x2 > x1) {
+                  if (y2 > y1) {
+                    y2 = deltaX + y1
+                  } else {
+                    y2 = y1 - deltaX
+                  }
+                } else {
+                  if (y2 > y1) {
+                    y2 = deltaX + y1
+                  } else {
+                    y2 = y1 - deltaX
+                  }
+                }
+              }
+            }
 
             line.setAttribute('x1', x1)
             line.setAttribute('y1', y1)
@@ -133,6 +161,20 @@ window.addEventListener('load', function () {
             let cy = (startPos.y + currPos.y) / 2
             let rx = Math.abs(startPos.x - currPos.x) / 2
             let ry = Math.abs(startPos.y - currPos.y) / 2
+
+            // 如果按下了 shift 键
+            if (shiftFlag == true) {
+              rx = Math.min(rx, ry)
+              ry = Math.min(rx, ry)
+              cx = startPos.x + rx
+              cy = startPos.y + ry
+              if (startPos.x - currPos.x > 0) {
+                cx = startPos.x - rx
+              }
+              if (startPos.y - currPos.y > 0) {
+                cy = startPos.y - ry
+              }
+            }
 
             ellipse.setAttribute('cx', cx)
             ellipse.setAttribute('cy', cy)
@@ -183,6 +225,12 @@ window.addEventListener('load', function () {
             let width = Math.abs(startPos.x - currPos.x)
             let height = Math.abs(startPos.y - currPos.y)
 
+            // 如果按下了 shift 键
+            if (shiftFlag == true) {
+              width = Math.min(width, height)
+              height = Math.min(width, height)
+            }
+
             let rx = 0
             let ry = 0
 
@@ -221,7 +269,10 @@ window.addEventListener('load', function () {
   })
 
   // 为重置按钮绑定点击事件，重置画板
-  reset.addEventListener('click', function (e) {
+  resetButton.addEventListener('click', reset)
+
+  // 重置画板功能
+  function reset() {
     drawandnosave = false
     svg.textContent = ''
     radioLine.checked = true
@@ -231,12 +282,16 @@ window.addEventListener('load', function () {
     widthInput.value = 5
     widthSpan.textContent = 5
     currentTool = 'tool-line'
-    svgContainer.innerHTML = '<svg width="100%" height="600"></svg>'
-    svg = svgContainer.querySelector('svg')
-  })
+
+    ro.unobserve(svgContainer)
+    main.innerHTML = '<div class="svgcontainer"> <svg width="100%" height="600"></svg> </div>'
+    svgContainer = main.querySelector('.svgcontainer')
+    svg = main.querySelector('svg')
+    ro.observe(svgContainer)
+  }
 
   // 为保存按钮绑定点击事件，保存并下载画板
-  save.addEventListener('click', function (e) {
+  saveButton.addEventListener('click', function (e) {
     drawandnosave = false
     let svgSource = svg.innerHTML // 获取 svg 内部的 html 内容
 
@@ -304,11 +359,39 @@ window.addEventListener('load', function () {
     let svgFile = fileInput.files[0] // 获取输入的第一个文件
     let fr = new FileReader() // 创建一个文件读取器
     fr.addEventListener('load', function () {
+      reset() // 重置画板
       let svgFileContent = fr.result // 获取文件内容
       svgContainer.innerHTML = svgFileContent // 将 svgContainer 内的旧 svg 对象替换为新的 svg 对象。
       svg = svgContainer.querySelector('svg') // 更新 svg 变量为最新的 svg 对象
       fileInput.value = null // 载入新文件后清空 fileInput 的内容
     })
     fr.readAsText(svgFile) // 以文本文件的方式读取 svgFile
+  })
+
+  // 创建 resize 事件监听器，监听 svgContainer 的大小变化，并同步更新 svg 的大小。
+  let ro = new ResizeObserver(entries => {
+    let rect = entries[0].contentRect
+    svg.setAttribute('width', `${rect.width}`)
+    svg.setAttribute('height', `${rect.height}`)
+    svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`)
+  })
+  ro.observe(svgContainer)
+
+  // 监听 shift 键是否按下或抬起
+  this.addEventListener('keydown', function (e) {
+    if (e.key === 'Shift') {
+      shiftFlag = true
+    }
+  })
+
+  this.addEventListener('keyup', function (e) {
+    if (e.key === 'Shift') {
+      shiftFlag = false
+    }
+  })
+
+  // 为帮助按钮绑定点击事件
+  helpButton.addEventListener('click', function (e) {
+    helpText.classList.toggle('active')
   })
 })
