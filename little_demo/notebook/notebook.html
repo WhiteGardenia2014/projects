@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notebook</title>
+  <link rel="stylesheet" href="css/notebook.css">
+  <script src="js/moment.js"></script>
+  <script src="js/notebook.js"></script>
+</head>
+
+<body>
+  <div class="background">
+    <div class="top-gradient"></div>
+    <div class="bottom-gradient"></div>
+  </div>
+  <div class="container">
+
+    <div class="select">
+      <button id="selectBackground">Background</button>
+      <div class="arrow"></div>
+      <div class="selectTitle">Click to change your background</div>
+    </div>
+
+    <div class="backgroundPage">
+        <div class="arrow"></div>
+        <div class="head-bar">
+          <div class="bar" data-type="background">Background</div>
+        </div>
+        <div class="content">
+          <div class="backgroundBox">
+          </div>
+        </div>
+    </div>
+
+    <div class="search">
+      <form target="_blank" action="https://www.google.com.hk/search">
+        <input type="text" type="search" autofocus="autofocus" tabindex="0" placeholder="Search Google"
+          autocomplete="off" name="q" class="search-input" id="search">
+      </form>
+    </div>
+
+    <div class="clock">
+      <div class="hour-container">
+        <div class="hour">22:47</div>
+        <div class="ampm">PM</div>
+      </div>
+      <div class="day">Sunday 8.22.2021</div>
+      <div class="arrow"></div>
+      <div class="clockTitle">Click to change between 24 and 12 hours</div>
+    </div>
+
+    <div class="noteContainer">
+    </div>
+
+    <div class="footer">
+      <button id="newNote">+ New note</button>
+    </div>
+
+    <div class="clearPage">
+      <div class="mask"></div>
+      <div class="confirm">
+        <div class="icon warning">
+          <div class="icon warning-straight"></div>
+          <div class="icon warning-point"></div>
+        </div>
+        <p>Do you want to remove all notes ?</p>
+        <div class="button-container">
+          <button class="button-no">No</button>
+          <button class="button-yes">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
