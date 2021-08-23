@@ -455,6 +455,7 @@ button[class^="button"] {
 }
 
 .clock .ampm {
+  display: none;
   position: absolute;
   top: 8px;
   right: -27px;
@@ -514,4 +515,33 @@ button[class^="button"] {
   -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
   -webkit-border-radius: 10px;
   border-radius: 10px;
+}
+
+.note textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note textarea::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: none;
+  display: none;
+  background: rgba(160, 160, 160, 0.8);
+  transition: all 1s;
+}
+
+.note textarea::-webkit-scrollbar-track {
+  display: none;
+}
+
+.note textarea:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
+.note textarea::-webkit-scrollbar-thumb:hover{
+  background: rgba(120, 120, 120, 0.8);
+}
+
+.note textarea::-webkit-scrollbar-thumb:active{
+  background: rgba(80, 80, 80, 0.8);
 }

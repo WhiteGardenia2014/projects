@@ -123,6 +123,16 @@ window.addEventListener('load', function () {
     let note = document.createElement('div')
     note.id = id
     note.classList.add('note', color)
+
+    let pageWidth = container.clientWidth
+    let pageHeight = container.clientHeight
+    if (left >= pageWidth - width - 20) {
+      left = pageWidth - width
+    }
+    if (top >= pageHeight - height - 50) {
+      top = pageHeight - height - 50
+    }
+
     note.style.left = left + 'px'
     note.style.top = top + 'px'
     note.style.width = width + 'px'
@@ -215,8 +225,8 @@ window.addEventListener('load', function () {
         var top = e.pageY - pos.y
 
         // 不允许元素移出视口边界，并实现磁吸效果
-        pageWidth = container.clientWidth
-        pageHeight = container.clientHeight
+        let pageWidth = container.clientWidth
+        let pageHeight = container.clientHeight
 
         if (left <= 20) {
           left = 0
