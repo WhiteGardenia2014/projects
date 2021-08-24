@@ -1,4 +1,5 @@
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
+
   let container = this.document.querySelector('.container')
   let noteContainer = this.document.querySelector('.noteContainer')
   let newNoteButton = this.document.querySelector('#newNote') // 创建笔记按钮
@@ -30,6 +31,7 @@ window.addEventListener('load', function () {
 
   // 切换背景图片相关
   let background = this.document.querySelector('.background')
+  let imgforload = this.document.querySelector('#imgforload')
   let selectBgButton = this.document.querySelector('#selectBackground')
   let backgroundPage = this.document.querySelector('.backgroundPage')
   let backgroundBox = this.document.querySelector('.backgroundBox')
@@ -61,7 +63,7 @@ window.addEventListener('load', function () {
   init()
 
   // 随机初始化一张背景图片
-  function randomBg(){
+  function randomBg() {
     let index = (Math.random() * 30 | 0) + 1
     if (index < 10) {
       index = '0' + String(index)
@@ -69,10 +71,12 @@ window.addEventListener('load', function () {
       index = String(index)
     }
     background.style.opacity = '0'
-    setTimeout(() => {
+    imgforload.src = `./images/bg-${index}.jpg`
+    imgforload.addEventListener('load', function () {
       background.style.backgroundImage = `url(./images/bg-${index}.jpg)`
       background.style.opacity = '1'
-    }, 50);
+      createBgBox()
+    })
   }
   randomBg()
 
@@ -151,7 +155,7 @@ window.addEventListener('load', function () {
 
     // 绑定点击事件，提升 note 层级
     // 绑定鼠标抬起和 change 事件，更新 note 信息
-    note.addEventListener('click', moveBefore)
+    note.addEventListener('mousedown', moveBefore)
     note.addEventListener('mouseup', updateNoteInfo)
     note.addEventListener('change', updateNoteInfo)
 
@@ -291,7 +295,7 @@ window.addEventListener('load', function () {
     // 如果鼠标按下的目标是 imgbox，就更换背景图片
     if (e.target.classList.contains('imgbox')) {
       let src = e.target.dataset.src
-      let url = './images/' + src 
+      let url = './images/' + src
       background.style.backgroundImage = `url(${url})`
       background.style.opacity = '0'
       setTimeout(() => {
@@ -507,7 +511,7 @@ window.addEventListener('load', function () {
     }
   })
 
-  // 生成背景图片 box
+  // 生成背景图片 box 并加载背景图片
   function createBgBox() {
     for (let i = 1; i <= 30; i++) {
       if (i < 10) {
@@ -522,5 +526,4 @@ window.addEventListener('load', function () {
       backgroundBox.append(box)
     }
   }
-  createBgBox()
 })

@@ -25,6 +25,10 @@ body {
   opacity: 0;
 }
 
+#imgforload {
+  display: none;
+}
+
 .top-gradient {
   position: absolute;
   top: 0;
@@ -538,10 +542,10 @@ button[class^="button"] {
   display: block;
 }
 
-.note textarea::-webkit-scrollbar-thumb:hover{
+.note textarea::-webkit-scrollbar-thumb:hover {
   background: rgba(120, 120, 120, 0.8);
 }
 
-.note textarea::-webkit-scrollbar-thumb:active{
+.note textarea::-webkit-scrollbar-thumb:active {
   background: rgba(80, 80, 80, 0.8);
 }
