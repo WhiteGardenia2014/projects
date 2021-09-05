@@ -9,6 +9,7 @@ body {
   height: 100%;
   min-width: 600px;
   user-select: none;
+  overflow-x: hidden;
 }
 
 .background {
@@ -17,7 +18,7 @@ body {
   width: 100%;
   height: 100%;
   /* background-image: url(../images/bg-23.jpg); */
-  background-color: white;
+  background-color: transparent;
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -162,6 +163,33 @@ body {
 .title-bar .btn:hover {
   color: rgb(85, 85, 85);
   cursor: default;
+}
+
+.changeColorMenu {
+  display: none;
+  position: absolute;
+  width: 110px;
+  z-index: 9999;
+}
+
+.changeColorMenu ul {
+  list-style: none;
+  background: white;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  box-shadow: 0px 0px 5px 3px rgb(0, 0, 0, 0.3);
+}
+
+.changeColorMenu ul li {
+  height: 28px;
+  line-height: 28px;
+  color: #444;
+  padding-left: 10px;
+}
+
+.changeColorMenu ul li:hover {
+  background-color: #F3EDED;
 }
 
 .footer {
@@ -329,7 +357,7 @@ body {
   width: 320px;
   height: 260px;
   margin: auto;
-  border-radius: 10px;
+  border-radius: 6px;
   background: #fffef8;
 }
 

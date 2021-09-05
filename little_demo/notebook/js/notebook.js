@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', function () {
   let noteContainer = this.document.querySelector('.noteContainer')
   let newNoteButton = this.document.querySelector('#newNote') // 创建笔记按钮
   let search = this.document.querySelector('#search') // 搜索栏
+  let changeColorMenu = this.document.querySelector('.changeColorMenu') // 切换颜色菜单栏
 
   let clearPage = this.document.querySelector('.clearPage') // 清除笔记窗口
   let noButton = this.document.querySelector('.button-no')
@@ -32,9 +33,12 @@ window.addEventListener('DOMContentLoaded', function () {
   // 切换背景图片相关
   let background = this.document.querySelector('.background')
   let imgforload = this.document.querySelector('#imgforload')
-  let selectBgButton = this.document.querySelector('#selectBackground')
   let backgroundPage = this.document.querySelector('.backgroundPage')
   let backgroundBox = this.document.querySelector('.backgroundBox')
+
+  // 当切换 note 背景颜色时，保存当前 note 对象的变量
+  let currentNote = null
+
 
   // 初始化函数
   function init() {
@@ -252,6 +256,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    // 触发了鼠标按下事件时，如果点击的不是切换颜色菜单栏，就将 changeColorMenu 隐藏
+    if (!e.target.classList.contains('changeColorItem')) {
+      changeColorMenu.style.display = 'none'
+    }
   })
 
   // 在 window 上监听鼠标点击事件
@@ -294,13 +302,51 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // 如果鼠标按下的目标是 imgbox，就更换背景图片
     if (e.target.classList.contains('imgbox')) {
+      let preSrc = background.style.backgroundImage
       let src = e.target.dataset.src
       let url = './images/' + src
+
       background.style.backgroundImage = `url(${url})`
-      background.style.opacity = '0'
-      setTimeout(() => {
-        background.style.opacity = '1'
-      }, 20);
+
+      if (src.endsWith('gif')) {
+        background.style.backgroundSize = '500px'
+        background.style.transition = 'all 0s'
+        if (preSrc.endsWith('gif")')) {
+          background.style.transition = 'all 0.5s'
+        }
+
+        if (src == 'bg-71.gif') {
+          background.style.backgroundColor = '#327191'
+        }
+        if (src == 'bg-72.gif') {
+          background.style.backgroundColor = '#58A5A3'
+        }
+        if (src == 'bg-73.gif') {
+          background.style.backgroundColor = '#FF7C61'
+        }
+        if (src == 'bg-74.gif') {
+          background.style.backgroundColor = '#83C2D6'
+        }
+        if (src == 'bg-75.gif') {
+          background.style.backgroundColor = '#FFFFFF'
+        }
+      } else {
+        background.style.backgroundSize = 'cover'
+        background.style.backgroundColor = 'transparent'
+        background.style.transition = 'all 0.5s'
+
+        if (preSrc.endsWith('gif")')) {
+          background.style.transition = 'all 0s'
+        }
+      }
+    }
+
+    // 如果鼠标按下的目标为切换颜色菜单栏中的选项
+    if (e.target.classList.contains('changeColorItem')) {
+      currentNote.className = `note ${e.target.textContent}` // 根据选择的颜色更改 note 的类名
+      currentNote.dataset.color = `${e.target.textContent}` // 更改 data-color 自定义属性
+      changeColorMenu.style.display = 'none' // 隐藏切换颜色菜单栏
+      updateNoteInfo.call(currentNote) // 更新 currentNote 的信息并保存
     }
 
   })
@@ -513,7 +559,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   // 生成背景图片 box 并加载背景图片
   function createBgBox() {
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 1; i <= 100; i++) {
       if (i < 10) {
         i = '0' + String(i)
       } else {
@@ -523,7 +569,41 @@ window.addEventListener('DOMContentLoaded', function () {
       box.classList.add('imgbox')
       box.dataset.src = `bg-${i}.jpg`
       box.style.backgroundImage = `url(./images/bg-${i}.jpg)`
+
+      // bg-71 ~ bg-75 为 gif 图
+      if (Number(i) >= 71 && Number(i) <= 75) {
+        box.dataset.src = `bg-${i}.gif`
+        box.style.backgroundImage = `url(./images/bg-${i}.gif)`
+      }
+
       backgroundBox.append(box)
     }
   }
+
+  // 监听打开右键菜单事件，如果在 textarea 上点击右键，替换为切换 note 颜色菜单
+  document.addEventListener('contextmenu', function (e) {
+    if (e.target.tagName == 'TEXTAREA') {
+      currentNote = e.target.parentElement.parentElement // 将触发切换颜色菜单的 note 保存在 currentNote 中
+      e.preventDefault()
+
+      let pageWidth = container.clientWidth
+      let pageHeight = container.clientHeight
+      let left = e.pageX
+      let top = e.pageY
+
+      // 调整切换颜色菜单不要超出屏幕
+      if (left > pageWidth - 120) {
+        left = left - 120
+      }
+      if (top > pageHeight - 180) {
+        top = top - 180
+      }
+
+      changeColorMenu.style.display = 'block'
+      changeColorMenu.style.left = left + 'px'
+      changeColorMenu.style.top = top + 'px'
+    } else {
+      changeColorMenu.style.display = 'none'
+    }
+  })
 })
