@@ -1,0 +1,247 @@
+.todoapp {
+  position: absolute;
+  background: rgba(35, 35, 35, 0.75);
+  color: white;
+  margin: 40px auto 50px;
+  width: 330px;
+  max-height: 400px;
+  line-height: 1.2em;
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  box-shadow: 0px 0px 5px #000;
+  border-radius: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.new-todo {
+  padding: 10px 10px 10px 50px;
+  border: none;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: inset 0 -2px 1px rgb(0, 0, 0, 0.03);
+
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.4em;
+  box-sizing: border-box;
+  outline: none;
+  color: #e6e6e6;
+}
+
+.new-todo::placeholder {
+  font-style: italic;
+  font-weight: 300;
+  color: #bbb;
+  font-size: 14px;
+}
+
+.main {
+  position: relative;
+  border-top: 1px solid #e6e6e6;
+}
+
+.toggle-all {
+  display: none;
+}
+
+#toggleAll:checked+label::before {
+  color: #e6e6e6;
+}
+
+label[for="toggleAll"] {
+  width: 60px;
+  height: 34px;
+  position: absolute;
+  font-size: 0;
+  top: -41px;
+  left: -13px;
+  transform: rotate(90deg);
+  user-select: none;
+}
+
+label[for="toggleAll"]::before {
+  content: '❯';
+  font-size: 16px;
+  color: #737373;
+  padding: 10px 27px 10px 27px;
+}
+
+.todo-list {
+  margin: 0;
+  padding: 5px 0;
+  list-style: none;
+}
+
+.todo-list li {
+  font-size: 16px;
+  position: relative;
+}
+
+.todo-list li:last-child {
+  border-bottom: none;
+}
+
+.todo-list li.editing .view {
+  display: none;
+}
+
+.todo-list .view {
+  transition: all 0.2s ease-out;
+}
+
+.todo-list .view:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.todo-list li.editing .edit {
+  display: block;
+  width: 280px;
+  height: 31px;
+  margin: 0 0 0 48px;
+}
+
+.todo-list .toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  height: 13px;
+  width: 13px;
+  border: none;
+  margin: auto 0;
+  outline: none;
+  /* opacity: 0; */
+}
+
+.todo-list label {
+  word-break: break-all;
+  padding: 6px 6px 6px 50px;
+  display: block;
+  line-height: 1.2em;
+  transition: color 0.4s;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 20px 20px;
+}
+
+.todo-list .toggle:checked+label {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+/* .todo-list .completed label {
+  color: #d9d9d9;
+  text-decoration: line-through;
+} */
+
+.todo-list .edit {
+  display: none;
+  position: relative;
+  outline: none;
+  margin: 0;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.4em;
+  border: 1px solid #999;
+  box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 20%);
+  box-sizing: border-box;
+}
+
+.todo-list .destroy {
+  /* display: none; */
+  margin: 0;
+  padding: 0;
+  background: none;
+  outline: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 24px;
+  color: transparent;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.todo-list .destroy::after {
+  content: '×';
+}
+
+.todo-list .destroy:hover {
+  color: white;
+}
+
+.todo-list li:hover .destroy {
+  color: white;
+}
+
+.todoapp .footer {
+  display: none;
+  width: 300px;
+  color: white;
+  padding: 8px 15px;
+  height: 20px;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+  line-height: 1.4em;
+  font-size: 12px;
+}
+
+.todo-count {
+  float: left;
+  text-align: left;
+  line-height: 21px;
+}
+
+.clear-completed {
+  float: right;
+  position: relative;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.clear-completed:hover {
+  text-decoration: underline;
+}
+
+.todo-container {
+
+  height: 20px;
+  width: 100px;
+  top: 28px;
+  left: 50px;
+  position: absolute;
+
+}
+
+.todo-container>button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  cursor: pointer;
+  font-family: 'neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.8);
+  border: none;
+  background: transparent;
+  color: #fffef8;
+}

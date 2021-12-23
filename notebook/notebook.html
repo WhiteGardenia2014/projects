@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notebook</title>
+  <link rel="shortcut icon" type="image/png" href="./images/ico.png">
+  <link rel="stylesheet" href="./css/notebook.css">
+  <link rel="stylesheet" href="./css/todos.css">
+  <script src="./js/moment.js"></script>
+  <script src="./js/notebook.js"></script>
+  <script src="./js/todos.js"></script>
+</head>
+
+<body>
+  <div class="background">
+    <img id="imgforload">
+    <div class="top-gradient"></div>
+    <div class="bottom-gradient"></div>
+  </div>
+  <div class="container">
+
+    <div class="select">
+      <button id="selectBackground">Background</button>
+      <div class="arrow"></div>
+      <div class="selectTitle">Click to change your background</div>
+    </div>
+
+    <div class="backgroundPage">
+      <div class="arrow"></div>
+      <div class="head-bar">
+        <div class="bar" data-type="background">Background</div>
+      </div>
+      <div class="content">
+        <div class="backgroundBox">
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <form target="_blank" action="https://www.google.com.hk/search">
+        <input type="search" type="search" autofocus="autofocus" tabindex="0" placeholder="Search Google"
+          autocomplete="off" name="q" class="search-input" id="search">
+      </form>
+    </div>
+
+    <div class="clock">
+      <div class="hour-container">
+        <div class="hour">22:47</div>
+        <div class="ampm">PM</div>
+      </div>
+      <div class="day">Sunday 8.22.2021</div>
+      <div class="arrow"></div>
+      <div class="clockTitle">Click to change between 24 and 12 hours</div>
+    </div>
+
+    <div class="noteContainer">
+    </div>
+    <div class="changeColorMenu">
+      <ul>
+        <li class="changeColorItem">blue</li>
+        <li class="changeColorItem">green</li>
+        <li class="changeColorItem">pink</li>
+        <li class="changeColorItem">purple</li>
+        <li class="changeColorItem">yellow</li>
+        <li class="changeColorItem">white</li>
+      </ul>
+    </div>
+
+    <div class="todo-container">
+      <button class="toggleTodo">Todo</button>
+      <div class="todoapp">
+        <div class="header">
+          <input type="text" autofocus autocomplete="off" placeholder="What needs to be done?" class="new-todo">
+        </div>
+        <div class="main">
+          <input type="checkbox" class="toggle-all" id="toggleAll">
+          <label for="toggleAll"></label>
+          <ul class="todo-list">
+
+          </ul>
+        </div>
+        <footer class="footer">
+          <span class="todo-count">
+            <span class="count-num">1</span>
+            item left
+          </span>
+          <button class="clear-completed">Clear completed</button>
+        </footer>
+      </div>
+    </div>
+
+
+    <div class="notefooter">
+      <button id="newNote">+ New Note</button>
+    </div>
+
+    <div class="clearPage">
+      <div class="mask"></div>
+      <div class="confirm">
+        <div class="icon warning">
+          <div class="icon warning-straight"></div>
+          <div class="icon warning-point"></div>
+        </div>
+        <p>Do you want to remove all notes ?</p>
+        <div class="button-container">
+          <button class="button-no">No</button>
+          <button class="button-yes">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

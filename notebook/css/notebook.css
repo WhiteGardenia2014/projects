@@ -1,0 +1,579 @@
+@font-face {
+  font-family: 'neue';
+  src: url('../font/neue.woff') format('woff');
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  min-width: 800px;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+.background {
+  position: absolute;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  /* background-image: url(../images/bg-23.jpg); */
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+#imgforload {
+  display: none;
+}
+
+.top-gradient {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 10vh;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  opacity: 0.2;
+}
+
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6vh;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  opacity: 0.5;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.note {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+
+  width: 200px;
+  height: 150px;
+  max-width: 600px;
+  max-height: 400px;
+  min-width: 200px;
+  min-height: 80px;
+
+  box-sizing: border-box;
+  padding-top: 28px;
+  border-radius: 2px;
+
+  box-shadow: 2px 3px 7px 0 rgb(0, 0, 0, 0.2);
+  overflow: hidden;
+  /* resize: both; */
+}
+
+.blue .title-bar {
+  background-color: #C9ECF8;
+}
+
+.blue textarea {
+  background-color: #C0E1F5;
+}
+
+.green .title-bar {
+  background-color: #C8F8C3;
+}
+
+.green textarea {
+  background-color: #A3ED9B;
+}
+
+.pink .title-bar {
+  background-color: #F1C3F1;
+}
+
+.pink textarea {
+  background-color: #ECB2EC;
+}
+
+.purple .title-bar {
+  background-color: #D6CFFE;
+}
+
+.purple textarea {
+  background-color: #CBC0FE;
+}
+
+.yellow .title-bar {
+  background-color: #FDFCBF;
+}
+
+.yellow textarea {
+  background-color: #FCFAAE;
+}
+
+.white .title-bar {
+  background-color: #F5F5F5;
+}
+
+.white textarea {
+  background-color: #ECECEC;
+}
+
+.note .inner {
+  width: 100%;
+  height: 100%;
+}
+
+.note .title-bar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 28px;
+}
+
+.note textarea {
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 5px;
+
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.title-bar .btn {
+  display: none;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #aaa;
+
+}
+
+.title-bar .btn:hover {
+  color: rgb(85, 85, 85);
+  cursor: default;
+}
+
+.changeColorMenu {
+  display: none;
+  position: absolute;
+  width: 110px;
+  z-index: 9999;
+}
+
+.changeColorMenu ul {
+  list-style: none;
+  background: white;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  box-shadow: 0px 0px 5px 3px rgb(0, 0, 0, 0.3);
+}
+
+.changeColorMenu ul li {
+  height: 28px;
+  line-height: 28px;
+  color: #444;
+  padding-left: 10px;
+}
+
+.changeColorMenu ul li:hover {
+  background-color: #F3EDED;
+}
+
+.notefooter {
+  position: absolute;
+  padding: 15px;
+  bottom: 0;
+}
+
+#newNote {
+  margin: 0 15px;
+  user-select: none;
+  cursor: pointer;
+  font-family: 'neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.8);
+  border: none;
+  background: transparent;
+  color: #fffef8;
+}
+
+#selectBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  cursor: pointer;
+  font-family: 'neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.8);
+  border: none;
+  background: transparent;
+  color: #fffef8;
+}
+
+#selectBackground:hover~.selectTitle,
+#selectBackground:hover~.arrow {
+  display: block;
+}
+
+.select {
+  height: 20px;
+  width: 100px;
+  top: 28px;
+  right: 260px;
+  position: absolute;
+}
+
+.select .selectTitle {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: -30px;
+  padding: 3px 8px;
+  width: 192px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #fffef8;
+  background: #000;
+  z-index: 10;
+}
+
+.select .arrow {
+  display: none;
+  position: absolute;
+  top: 18px;
+  left: 60px;
+  border: 6px solid transparent;
+  border-bottom-color: #000;
+}
+
+/* 切换背景页面 */
+.backgroundPage {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 560px;
+  height: 440px;
+  background-color: #fffef8;
+  box-shadow: 0 0 20px rgb(0, 0, 0, 0.6);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.backgroundPage .arrow {
+  top: -20px;
+  left: 270px;
+  position: absolute;
+  border: 10px solid transparent;
+  border-bottom-color: #fffef8;
+}
+
+.backgroundPage .head-bar {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 5px;
+  width: 100%;
+  height: 40px;
+  background-color: #F2F3F4;
+  border-radius: 5px 5px 0 0;
+}
+
+.head-bar .bar {
+  padding: 0 20px;
+  margin: 0 5px;
+  font-size: 14px;
+  line-height: 40px;
+  color: #5692F5;
+  background: #fffef8;
+}
+
+.backgroundPage .content {
+  box-sizing: border-box;
+  padding: 10px 20px 30px 20px;
+  width: 100%;
+  height: 400px;
+}
+
+.backgroundPage .backgroundBox {
+  display: flex;
+  overflow: auto;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.backgroundBox .imgbox {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: pink;
+  margin: 10px;
+  background-image: url(../images/bg-23.jpg);
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+/* 清除笔记页面 */
+.clearPage {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all 0.3s;
+}
+
+.mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.4;
+}
+
+.confirm {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  height: 260px;
+  margin: auto;
+  border-radius: 6px;
+  background: #fffef8;
+}
+
+.confirm p {
+  text-align: center;
+}
+
+/* warning 图标 */
+.warning {
+  position: relative;
+  margin: 30px auto 25px;
+  box-sizing: border-box;
+  width: 90px;
+  height: 90px;
+  border: 4px solid #f8bb86;
+  border-radius: 50%;
+}
+
+.warning-straight {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 5px;
+  height: 47px;
+  border-radius: 2px;
+  margin-left: -2px;
+  background-color: #f8bb86;
+}
+
+.warning-point {
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  bottom: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #f8bb86;
+}
+
+.button-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+button[class^="button"] {
+  width: 94px;
+  height: 42px;
+  margin: 10px;
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fffef8;
+  cursor: pointer;
+}
+
+.button-no {
+  background-color: #c1c1c1;
+  box-shadow: 0px 0px 2px #c1c1c1aa;
+}
+
+.button-no:hover {
+  background-color: #B9B9B9;
+}
+
+.button-yes {
+  background-color: #DD6B55;
+  box-shadow: 0px 0px 2px #DD6B55aa;
+}
+
+.button-yes:hover {
+  background-color: #D46752;
+}
+
+/* 顶部搜索栏 */
+.search {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 22%;
+  margin: auto;
+  padding-top: 15px;
+  text-align: center;
+}
+
+.search form {
+  border-bottom: 3px solid rgb(255, 255, 255, 0.6);
+}
+
+.search-input {
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  padding: 10px;
+  height: 45px;
+  width: 100%;
+  font-size: 20px;
+  transition: all 0.3s;
+  background: transparent;
+}
+
+.search-input:focus {
+  background: rgb(255, 255, 255, 0.6);
+}
+
+/* 时钟 */
+.clock {
+  font-family: 'neue', Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  height: 75px;
+  color: #fffef8;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.8);
+}
+
+.clock .hour-container {
+  position: absolute;
+  cursor: pointer;
+}
+
+.clock .hour {
+  position: relative;
+  font-size: 50px;
+}
+
+.clock .ampm {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: -27px;
+}
+
+.clock .day {
+  position: relative;
+  top: 54px;
+  font-size: 15px;
+  white-space: pre;
+}
+
+.clock .clockTitle {
+  font-family: "Microsoft YaHei";
+  display: none;
+  position: absolute;
+  top: 86px;
+  left: -20px;
+  padding: 3px 8px;
+  width: 192px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #fffef8;
+  background: #000;
+  z-index: 10;
+}
+
+.clock .arrow {
+  display: none;
+  position: absolute;
+  top: 75px;
+  left: 110px;
+  border: 6px solid transparent;
+  border-bottom-color: #000;
+}
+
+.clock:hover .clockTitle,
+.clock:hover .arrow {
+  display: block;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(236, 236, 236, 0.8);
+  box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.note textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note textarea::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: none;
+  display: none;
+  background: rgba(160, 160, 160, 0.8);
+  transition: all 1s;
+}
+
+.note textarea::-webkit-scrollbar-track {
+  display: none;
+}
+
+.note textarea:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
+.note textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.8);
+}
+
+.note textarea::-webkit-scrollbar-thumb:active {
+  background: rgba(80, 80, 80, 0.8);
+}
