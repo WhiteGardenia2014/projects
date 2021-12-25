@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegExp-Railway</title>
+  <link rel="shortcut icon" type="image/icon" href="./favicon.ico">
+  <style>
+    .html {
+      font-size: 18px;
+    }
+
+    .text {
+      margin-left: 20px;
+    }
+
+    .regexpInput {
+      width: 1500px;
+      font-size: 18px;
+      font-family: consolas;
+      outline: none;
+    }
+
+    button {
+      position: relative;
+      font-size: 18px;
+      margin: 20px;
+    }
+
+    svg {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="inputcontainer">
+      <span class="text">请输入正则表达式 : </span> <input type="text" class="regexpInput"
+        value="(a(a(a)?)+)*(p|d|(ccc|ddd|eee|fff))(?!foo)(hufa|((a{2,4}b{0,99}c{1,99}d{3}e{4}f{4,})*)*(?:[^a-ceiwu0-9]*)*(cd|ef|(fo[odc]+)+dd)+c[def]|def|abc)">
+    </div>
+    <button id="createGraph">生成铁路图</button>
+    <button id="downloadsvg">导出为SVG</button>
+    <button id="downloadpng">导出为PNG</button>
+    <svg width="800" height="800"></svg>
+  </div>
+  <script src="./js/regexp-rail.js"></script>
+</body>
+
+</html>
