@@ -12,12 +12,14 @@
       font-size: 18px;
     }
 
-    .text {
-      margin-left: 20px;
+    .container {
+      margin: 20px;
     }
 
+
+
     .regexpInput {
-      width: 1500px;
+      width: 1000px;
       font-size: 18px;
       font-family: consolas;
       outline: none;
@@ -32,18 +34,48 @@
     svg {
       display: block;
     }
+
+    h1 {
+      text-align: center;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .buttons {
+      display: flex;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <h1>正则解析器</h1>
+    <hr>
+    <p><strong>简介</strong></p>
+    <p>该网站可以将您需要的正则表达式解析为可视化路线图
+      <br>
+      <br> 注意：
+      <br> 1.请输入正确规范的正则表达式
+      <br> 2.零宽断言不会计算在捕获分组计数之内
+      <br> 3.暂不支持部分转义字符的解析
+    </p>
+    <hr>
     <div class="inputcontainer">
-      <span class="text">请输入正则表达式 : </span> <input type="text" class="regexpInput"
-        value="(a(a(a)?)+)*(p|d|(ccc|ddd|eee|fff))(?!foo)(hufa|((a{2,4}b{0,99}c{1,99}d{3}e{4}f{4,})*)*(?:[^a-ceiwu0-9]*)*(cd|ef|(fo[odc]+)+dd)+c[def]|def|abc)">
+      <p class="text">请输入想要解析的正则表达式 : </p>
+      <!-- <input type="text" class="regexpInput"
+        value="(a(a(a)?)+)*(p|d|(ccc|ddd|eee|fff))(?!foo)(hufa|((a{2,4}b{0,99}c{1,99}d{3}e{4}f{4,})*)*(?:[^a-ceiwu0-9]*)*(cd|ef|(fo[odc]+)+dd)+c[def]|def|abc)"> -->
+      <div>
+        <textarea name="" id="" cols="100" rows="3"
+          class="regexpInput">(a(a(a)?)+)*(p|d|(ccc|ddd|eee|fff))(?!foo)(hufa|((a{2,4}b{0,99}c{1,99}d{3}e{4}f{4,})*)*(?:[^a-ceiwu0-9]*)*(cd|ef|(fo[odc]+)+dd)+c[def]|def|abc)</textarea>
+      </div>
     </div>
-    <button id="createGraph">生成铁路图</button>
-    <button id="downloadsvg">导出为SVG</button>
-    <button id="downloadpng">导出为PNG</button>
+    <div class="buttons">
+      <button id="createGraph">生成铁路图</button>
+      <button id="downloadsvg">导出为SVG</button>
+      <button id="downloadpng">导出为PNG</button>
+    </div>
     <svg width="800" height="800"></svg>
   </div>
   <script src="./js/regexp-rail.js"></script>

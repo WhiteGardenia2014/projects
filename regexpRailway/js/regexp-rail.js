@@ -769,12 +769,17 @@ var downloadpng = document.querySelector('#downloadpng')
 var svg = document.querySelector('svg')
 
 createGraph.addEventListener('click', function () {
-  svg.innerHTML = ''
-  var str = regexpInput.value
-  var node = parsePattern(str)
-  var graph = createRegExpGraph(node)
-  svg.setAttribute('width', `${graph.box.width}`)
-  svg.setAttribute('height', `${graph.box.height}`)
+  try {
+    svg.innerHTML = ''
+    var str = regexpInput.value
+    var node = parsePattern(str)
+    var graph = createRegExpGraph(node)
+    svg.setAttribute('width', `${graph.box.width}`)
+    svg.setAttribute('height', `${graph.box.height}`)
+  } catch (error) {
+    regexpInput.value = ""
+    regexpInput.placeholder = "解析出错，请重新输入"
+  }
 })
 
 downloadsvg.addEventListener('click', function () {
@@ -801,7 +806,7 @@ downloadsvg.addEventListener('click', function () {
   let url = URL.createObjectURL(blob)
   let anchor = document.createElement('a')
   anchor.href = url
-  anchor.download = 'undefined.svg'
+  anchor.download = 'default.svg'
   anchor.click()
 })
 
@@ -829,7 +834,7 @@ downloadpng.addEventListener('click', function () {
     context.drawImage(image, 0, 0)
     var a = document.createElement('a')
     a.href = canvas.toDataURL("image/png")
-    a.download = 'undefined.png'
+    a.download = 'default.png'
     a.click()
   }
 })
